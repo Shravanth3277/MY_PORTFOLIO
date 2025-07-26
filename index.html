@@ -1,638 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shravanth | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* CSS Variables for Neon Blue, Pink, and Pure Black */
-    :root {
-      --neon-blue: #00FFFF; /* Bright Cyan */
-      --neon-pink: #FF00FF; /* Bright Magenta */
-      --primary-gradient: linear-gradient(105deg, var(--neon-blue) 0%, var(--neon-pink) 100%); /* 105-degree gradient */
-      --secondary-gradient: linear-gradient(80deg, var(--neon-blue) 0%, var(--neon-pink) 100%); /* 80-degree gradient */
-      --text-main: #E0E0E0; /* Slightly off-white for main text */
-      --bg-pure-black: #000000;
-      --navbar-bg: rgba(0, 0, 0, 0.98); /* Almost opaque black */
-      --shadow-primary: rgba(0, 255, 255, 0.5); /* Neon blue shadow */
-      --shadow-secondary: rgba(255, 0, 255, 0.5); /* Neon pink shadow */
-      --border-gradient-circle: conic-gradient(from 0deg at 50% 50%, var(--neon-blue), var(--neon-pink), var(--neon-blue)); /* Conic gradient for perfect circle border */
-      --border-gradient-pill: linear-gradient(80deg, var(--neon-blue), var(--neon-pink)); /* Linear gradient for pill border */
-      --transition-base: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth and slightly bouncy */
-      --heading-font: 'Major Mono Display', monospace; /* Futuristic, complex-simple font */
-      --body-font: 'Rajdhani', sans-serif; /* Clean, modern, simple font */
-    }
-
-    /* Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: var(--bg-pure-black); /* Pure black background for the entire body */
-      color: var(--text-main);
-      font-family: var(--body-font);
-      line-height: 1.8;
-      position: relative;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Background Particle Animation */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 10% 20%, rgba(0,255,255,0.05) 0%, transparent 50%),
-                  radial-gradient(circle at 90% 80%, rgba(255,0,255,0.05) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: -1;
-      animation: bgPulse 10s infinite alternate ease-in-out;
-    }
-
-    @keyframes bgPulse {
-      from { background-position: 0% 0%; }
-      to { background-position: 100% 100%; }
-    }
-
-    /* Background Watermark */
-    body::after {
-      content: "SHRAVANTH";
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotateY(15deg) scale(1.1);
-      font-size: 22rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.005);
-      text-shadow: 0 0 50px rgba(0,255,255,0.03), 0 0 50px rgba(255,0,255,0.03);
-      z-index: 0;
-      white-space: nowrap;
-      font-family: var(--heading-font);
-      letter-spacing: 15px;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-
-    /* Navigation Bar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.8rem 7%;
-      background-color: var(--navbar-bg);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px) brightness(80%);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .logo {
-      font-size: 3.5rem;
-      font-weight: 700; /* Ensure same weight for all letters */
-      background: var(--primary-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-family: var(--heading-font);
-      letter-spacing: 4px;
-      transition: transform 0.3s ease-in-out;
-      text-shadow: 0 0 15px var(--shadow-primary);
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
-      text-shadow: 0 0 25px var(--shadow-secondary);
-    }
-
-    .nav-links a {
-      margin-left: 4rem;
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1.3rem;
-      position: relative;
-      transition: all var(--transition-base);
-      padding-bottom: 10px;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 4px;
-      background: var(--primary-gradient);
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-      transition: width var(--transition-base);
-      border-radius: 2px;
-    }
-
-    .nav-links a:hover {
-      background: var(--primary-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transform: translateY(-9px);
-      text-shadow: 0 0 10px var(--shadow-primary);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Sections - No box-shadow, no border-radius, pure black background */
-    section {
-      padding: 14rem 10%;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      max-width: 2000px;
-      margin: 0 auto;
-      background-color: var(--bg-pure-black);
-      overflow: hidden;
-    }
-
-    h1, h2 {
-      font-family: var(--heading-font);
-      font-weight: 700;
-      margin-bottom: 3rem;
-      background: var(--primary-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 6rem;
-      letter-spacing: 4px;
-      line-height: 1.1;
-      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 20px var(--shadow-primary);
-    }
-
-    h2 {
-      font-size: 5rem;
-    }
-
-    p {
-      font-size: 1.5rem;
-      color: var(--text-main);
-      max-width: 1100px;
-      margin: 0 auto 3.5rem auto;
-      font-weight: 300;
-    }
-
-    /* Home Section */
-    .home {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: calc(100vh - 120px);
-      padding: 0;
-    }
-
-    .home img {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%; /* Ensures perfect circle */
-      object-fit: cover;
-      margin-bottom: 4rem;
-      padding: 10px; /* Padding creates space for the pseudo-element border */
-      position: relative; /* Needed for pseudo-element */
-      z-index: 1; /* Keep image above pseudo-border */
-      box-shadow: 0 0 60px var(--shadow-primary), inset 0 0 30px var(--shadow-secondary);
-      animation: pulseBorder 3.5s infinite alternate ease-in-out;
-    }
-
-    /* Pseudo-element for circular gradient border */
-    .home img::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 50%;
-      padding: 10px; /* Adjust to match image padding */
-      background: var(--border-gradient-circle); /* Use conic gradient for smooth circle */
-      -webkit-mask: /* Creates the border cutout */
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude; /* Modern way to achieve cutout */
-      z-index: -1; /* Place behind the image */
-      animation: pulseBorderColor 3.5s infinite alternate ease-in-out;
-    }
-
-    @keyframes pulseBorder {
-      from { box-shadow: 0 0 50px var(--shadow-primary), inset 0 0 20px var(--shadow-primary); }
-      to { box-shadow: 0 0 100px var(--shadow-secondary), inset 0 0 40px var(--shadow-primary); }
-    }
-
-    @keyframes pulseBorderColor {
-        from { background: conic-gradient(from 0deg at 50% 50%, var(--neon-blue), var(--neon-pink), var(--neon-blue)); }
-        to { background: conic-gradient(from 360deg at 50% 50%, var(--neon-pink), var(--neon-blue), var(--neon-pink)); } /* Rotate gradient for pulse */
-    }
-
-
-    .home h1 {
-      font-size: 6rem; /* Slightly reduced font size */
-      margin-bottom: 2rem;
-    }
-
-    .home p {
-      font-size: 1.8rem;
-      max-width: 1000px;
-      color: var(--neon-blue);
-      font-weight: 400;
-      text-shadow: 0 0 10px rgba(0,255,255,0.5);
-    }
-
-    /* Skills Section */
-    .skills-container {
-      margin-top: 6rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3.5rem;
-      position: relative;
-      padding: 3rem 0;
-    }
-
-    .skill-item {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 320px;
-      height: 110px;
-      border-radius: 60px; /* Ensures pill shape */
-      padding: 0 3rem;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--neon-blue);
-      text-transform: capitalize;
-      letter-spacing: 1.5px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-      transition: all var(--transition-base);
-      overflow: hidden;
-      cursor: pointer;
-      isolation: isolate;
-
-      /* Inner background & border */
-      background: var(--bg-pure-black); /* Set inner background to pure black */
-      border: 2px solid transparent; /* Transparent border for the real border to show through pseudo-element */
-    }
-
-    /* Pseudo-element for skill item gradient border */
-    .skill-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: inherit; /* Inherit border-radius from parent */
-      padding: 2px; /* Adjust to match desired border thickness */
-      background: var(--border-gradient-pill); /* Use linear gradient for pill border */
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      z-index: -1;
-    }
-
-    /* Pseudo-element for background fill effect on hover */
-    .skill-item::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      border-radius: 60px;
-      background: var(--primary-gradient);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transition-base);
-      z-index: -2; /* Place behind ::before and content */
-    }
-
-
-    .skill-item:hover {
-      transform: translateY(-20px) scale(1.08);
-      box-shadow: 0 20px 40px var(--shadow-primary), 0 0 30px var(--shadow-secondary);
-      color: var(--bg-pure-black); /* Dark text on gradient background */
-    }
-
-    .skill-item:hover::before {
-      opacity: 0; /* Hide the gradient border when filled */
-    }
-
-    .skill-item:hover::after {
-      transform: scaleX(1); /* Fill background */
-    }
-
-
-    /* My Work Section (Video Cards) */
-    .work-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5rem;
-      margin-top: 5rem;
-      justify-content: center;
-    }
-
-    @media (max-width: 1800px) {
-        .work-container {
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shravanth | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Neon Blue, Pink, and Pure Black */
+        :root {
+            --neon-blue: #00FFFF; /* Bright Cyan */
+            --neon-pink: #FF00FF; /* Bright Magenta */
+            --primary-gradient: linear-gradient(105deg, var(--neon-blue) 0%, var(--neon-pink) 100%); /* 105-degree gradient */
+            --secondary-gradient: linear-gradient(80deg, var(--neon-blue) 0%, var(--neon-pink) 100%); /* 80-degree gradient */
+            --text-main: #E0E0E0; /* Slightly off-white for main text */
+            --bg-pure-black: #000000;
+            --navbar-bg: rgba(0, 0, 0, 0.98); /* Almost opaque black */
+            --shadow-primary: rgba(0, 255, 255, 0.5); /* Neon blue shadow */
+            --shadow-secondary: rgba(255, 0, 255, 0.5); /* Neon pink shadow */
+            --border-gradient-circle: conic-gradient(from 0deg at 50% 50%, var(--neon-blue), var(--neon-pink), var(--neon-blue)); /* Conic gradient for perfect circle border */
+            --border-gradient-pill: linear-gradient(80deg, var(--neon-blue), var(--neon-pink)); /* Linear gradient for pill border */
+            --transition-base: 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth and slightly bouncy */
+            --heading-font: 'Major Mono Display', monospace; /* Futuristic, complex-simple font */
+            --body-font: 'Rajdhani', sans-serif; /* Clean, modern, simple font */
         }
-    }
 
-    .video-card {
-      perspective: 2500px;
-      width: 100%;
-      max-width: 550px;
-      height: 380px;
-      border-radius: 25px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
-      transition: transform var(--transition-base), box-shadow var(--transition-base);
-    }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .video-card:hover {
-      transform: translateY(-20px);
-      box-shadow: 0 35px 80px var(--shadow-secondary);
-    }
+        body {
+            background-color: var(--bg-pure-black); /* Pure black background for the entire body */
+            color: var(--text-main);
+            font-family: var(--body-font);
+            line-height: 1.8;
+            position: relative;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    .video-inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 1.8s cubic-bezier(0.86, 0, 0.07, 1.2);
-    }
+        /* Background Particle Animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(0,255,255,0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(255,0,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: bgPulse 10s infinite alternate ease-in-out;
+        }
 
-    .video-card:hover .video-inner {
-      transform: rotateY(180deg);
-    }
+        @keyframes bgPulse {
+            from { background-position: 0% 0%; }
+            to { background-position: 100% 100%; }
+        }
 
-    .front, .back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 25px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 4px solid;
-      border-image: var(--secondary-gradient) 1;
-    }
+        /* Background Watermark */
+        body::after {
+            content: "SHRAVANTH";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateY(15deg) scale(1.1);
+            font-size: 22rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.005);
+            text-shadow: 0 0 50px rgba(0,255,255,0.03), 0 0 50px rgba(255,0,255,0.03);
+            z-index: 0;
+            white-space: nowrap;
+            font-family: var(--heading-font);
+            letter-spacing: 15px;
+            pointer-events: none;
+            opacity: 0.8;
+        }
 
-    .front {
-      background: linear-gradient(45deg, rgba(0,255,255,0.2), rgba(255,0,255,0.1)), url('https://via.placeholder.com/550x380.png?text=VIEW+PROJECT') no-repeat center/cover;
-      color: var(--neon-blue);
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-shadow: 0 0 15px rgba(0,0,0,0.9);
-      padding: 40px;
-      cursor: pointer;
-    }
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.8rem 7%;
+            background-color: var(--navbar-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px) brightness(80%);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
 
-    .back {
-      background: var(--bg-pure-black);
-      transform: rotateY(180deg);
-    }
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700; /* Ensure same weight for all letters */
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: var(--heading-font);
+            letter-spacing: 4px;
+            transition: transform 0.3s ease-in-out;
+            text-shadow: 0 0 15px var(--shadow-primary);
+        }
 
-    .back video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 25px;
-    }
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 25px var(--shadow-secondary);
+        }
 
-    /* Contact Section */
-    .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 7rem;
-      margin-top: 7rem;
-    }
+        .nav-links a {
+            margin-left: 4rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.3rem;
+            position: relative;
+            transition: all var(--transition-base);
+            padding-bottom: 10px;
+        }
 
-    .contact-icons a {
-      display: block;
-      transition: transform var(--transition-base);
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            transition: width var(--transition-base);
+            border-radius: 2px;
+        }
 
-    .contact-icons img {
-      width: 90px;
-      height: 90px;
-      filter: grayscale(100%) brightness(50%) drop-shadow(0 0 5px rgba(0,0,0,0.8));
-      transition: all var(--transition-base);
-    }
+        .nav-links a:hover {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateY(-9px);
+            text-shadow: 0 0 10px var(--shadow-primary);
+        }
 
-    .contact-icons img:hover {
-      transform: translateY(-20px) scale(1.25) rotateZ(5deg);
-      filter: grayscale(0%) brightness(180%) drop-shadow(0 0 40px var(--shadow-primary)) drop-shadow(0 0 40px var(--shadow-secondary));
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    /* Responsive Adjustments */
-    @media (max-width: 1800px) {
-        body::after { font-size: 18rem; letter-spacing: 12px; }
-        nav { padding: 1.5rem 6%; }
-        .logo { font-size: 3rem; }
-        .nav-links a { margin-left: 3.5rem; font-size: 1.25rem; }
-        section { padding: 12rem 8%; }
-        h1 { font-size: 5rem; }
-        h2 { font-size: 4rem; }
-        p { font-size: 1.4rem; }
-        .home img { width: 250px; height: 250px; }
-        .skill-item { min-width: 280px; height: 100px; font-size: 1.7rem; }
-        .video-card { max-width: 500px; height: 350px; }
-        .front { font-size: 2.2rem; }
-        .contact-icons img { width: 80px; height: 80px; }
-    }
+        /* Sections - No box-shadow, no border-radius, pure black background */
+        section {
+            padding: 14rem 10%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 2000px;
+            margin: 0 auto;
+            background-color: var(--bg-pure-black);
+            overflow: hidden;
+        }
 
-    @media (max-width: 1400px) {
-        body::after { font-size: 15rem; letter-spacing: 10px; }
-        nav { padding: 1.2rem 5%; }
-        .logo { font-size: 2.5rem; }
-        .nav-links a { margin-left: 3rem; font-size: 1.15rem; }
-        section { padding: 10rem 6%; }
-        h1 { font-size: 4rem; }
-        h2 { font-size: 3.5rem; }
-        p { font-size: 1.3rem; }
-        .home img { width: 220px; height: 220px; }
-        .skill-item { min-width: 250px; height: 90px; font-size: 1.5rem; }
-        .video-card { max-width: 450px; height: 320px; }
-        .front { font-size: 2rem; }
-        .contact-icons img { width: 70px; height: 70px; }
-    }
+        h1, h2 {
+            font-family: var(--heading-font);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 6rem;
+            letter-spacing: 4px;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 20px var(--shadow-primary);
+        }
 
-    @media (max-width: 1024px) {
-        body::after { font-size: 10rem; letter-spacing: 8px; }
-        nav { flex-direction: column; align-items: flex-start; padding: 1rem; }
-        .logo { margin-bottom: 1rem; font-size: 2.2rem; }
-        .nav-links { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; }
-        .nav-links a { margin: 0.5rem 1rem; font-size: 1.1rem; }
-        section { padding: 8rem 4%; }
-        h1 { font-size: 3.5rem; }
-        h2 { font-size: 3rem; }
-        p { font-size: 1.2rem; }
-        .home img { width: 180px; height: 180px; }
-        .skills-container { gap: 2.5rem; }
-        .skill-item { min-width: 220px; height: 80px; font-size: 1.3rem; }
-        .work-container { grid-template-columns: 1fr; gap: 3rem; }
-        .video-card { max-width: 90%; height: 280px; }
-        .front { font-size: 1.8rem; }
-        .contact-icons { gap: 5rem; }
-        .contact-icons img { width: 60px; height: 60px; }
-    }
+        h2 {
+            font-size: 5rem;
+        }
 
-    @media (max-width: 768px) {
-        body::after { font-size: 7rem; letter-spacing: 5px; }
-        .logo { font-size: 1.8rem; }
-        .nav-links a { font-size: 1rem; margin: 0.4rem 0.8rem; }
-        h1 { font-size: 3rem; }
-        h2 { font-size: 2.5rem; }
-        p { font-size: 1rem; }
-        .home img { width: 150px; height: 150px; }
-        .skills-container { gap: 1.5rem; }
-        .skill-item { min-width: 180px; height: 70px; font-size: 1.1rem; }
-        .video-card { height: 220px; }
-        .front { font-size: 1.6rem; }
-        .contact-icons { gap: 3rem; }
-        .contact-icons img { width: 50px; height: 50px; }
-    }
+        p {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            max-width: 1100px;
+            margin: 0 auto 3.5rem auto;
+            font-weight: 300;
+        }
 
-    @media (max-width: 480px) {
-        body::after { font-size: 5rem; letter-spacing: 3px; }
-        .logo { font-size: 1.5rem; }
-        .nav-links { flex-direction: column; align-items: center; }
-        .nav-links a { margin: 0.2rem 0; font-size: 0.9rem; }
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 2rem; }
-        p { font-size: 0.9rem; }
-        .home img { width: 120px; height: 120px; }
-        .skills-container { gap: 1rem; }
-        .skill-item { min-width: 150px; height: 60px; font-size: 1rem; padding: 0 1.2rem; }
-        .video-card { height: 180px; }
-        .front { font-size: 1.4rem; }
-        .contact-icons { gap: 2rem; }
-        .contact-icons img { width: 40px; height: 40px; }
-    }
+        /* Home Section */
+        .home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px);
+            padding: 0;
+        }
 
-  </style>
+        .home img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%; /* Ensures perfect circle */
+            object-fit: cover;
+            margin-bottom: 4rem;
+            padding: 10px; /* Padding creates space for the pseudo-element border */
+            position: relative; /* Needed for pseudo-element */
+            z-index: 1; /* Keep image above pseudo-border */
+            box-shadow: 0 0 60px var(--shadow-primary), inset 0 0 30px var(--shadow-secondary);
+            animation: pulseBorder 3.5s infinite alternate ease-in-out;
+        }
+
+        /* Pseudo-element for circular gradient border */
+        .home img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            padding: 10px; /* Adjust to match image padding */
+            background: var(--border-gradient-circle); /* Use conic gradient for smooth circle */
+            -webkit-mask: /* Creates the border cutout */
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude; /* Modern way to achieve cutout */
+            z-index: -1; /* Place behind the image */
+            animation: pulseBorderColor 3.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseBorder {
+            from { box-shadow: 0 0 50px var(--shadow-primary), inset 0 0 20px var(--shadow-primary); }
+            to { box-shadow: 0 0 100px var(--shadow-secondary), inset 0 0 40px var(--shadow-primary); }
+        }
+
+        @keyframes pulseBorderColor {
+            from { background: conic-gradient(from 0deg at 50% 50%, var(--neon-blue), var(--neon-pink), var(--neon-blue)); }
+            to { background: conic-gradient(from 360deg at 50% 50%, var(--neon-pink), var(--neon-blue), var(--neon-pink)); } /* Rotate gradient for pulse */
+        }
+
+        .home h1 {
+            font-size: 6rem; /* Slightly reduced font size */
+            margin-bottom: 2rem;
+        }
+
+        .home p {
+            font-size: 1.8rem;
+            max-width: 1000px;
+            color: var(--neon-blue);
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            margin-top: 6rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3.5rem;
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .skill-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 320px;
+            height: 110px;
+            border-radius: 60px; /* Ensures pill shape */
+            padding: 0 3rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            text-transform: capitalize;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            transition: all var(--transition-base);
+            overflow: hidden;
+            cursor: pointer;
+            isolation: isolate;
+
+            /* Inner background & border */
+            background: var(--bg-pure-black); /* Set inner background to pure black */
+            border: 2px solid transparent; /* Transparent border for the real border to show through pseudo-element */
+        }
+
+        /* Pseudo-element for skill item gradient border */
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit; /* Inherit border-radius from parent */
+            padding: 2px; /* Adjust to match desired border thickness */
+            background: var(--border-gradient-pill); /* Use linear gradient for pill border */
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            z-index: -1;
+        }
+
+        /* Pseudo-element for background fill effect on hover */
+        .skill-item::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 60px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+            z-index: -2; /* Place behind ::before and content */
+        }
+
+        .skill-item:hover {
+            transform: translateY(-20px) scale(1.08);
+            box-shadow: 0 20px 40px var(--shadow-primary), 0 0 30px var(--shadow-secondary);
+            color: var(--bg-pure-black); /* Dark text on gradient background */
+        }
+
+        .skill-item:hover::before {
+            opacity: 0; /* Hide the gradient border when filled */
+        }
+
+        .skill-item:hover::after {
+            transform: scaleX(1); /* Fill background */
+        }
+
+        /* My Work Section (Video Cards) */
+        .work-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5rem;
+            margin-top: 5rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 1800px) {
+            .work-container {
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            }
+        }
+
+        .video-card {
+            perspective: 2500px;
+            width: 100%;
+            max-width: 550px;
+            height: 380px;
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .video-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 35px 80px var(--shadow-secondary);
+        }
+
+        .video-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.8s cubic-bezier(0.86, 0, 0.07, 1.2);
+        }
+
+        .video-card:hover .video-inner {
+            transform: rotateY(180deg);
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid;
+            border-image: var(--secondary-gradient) 1;
+        }
+
+        .front {
+            background: linear-gradient(45deg, rgba(0,255,255,0.2), rgba(255,0,255,0.1)), url('https://via.placeholder.com/550x380.png?text=VIEW+PROJECT') no-repeat center/cover;
+            color: var(--neon-blue);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0,0,0,0.9);
+            padding: 40px;
+            cursor: pointer;
+        }
+
+        .back {
+            background: var(--bg-pure-black);
+            transform: rotateY(180deg);
+        }
+
+        .back video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        /* Contact Section */
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 7rem;
+            margin-top: 7rem;
+        }
+
+        .contact-icons a {
+            display: block;
+            transition: transform var(--transition-base);
+        }
+
+        .contact-icons img {
+            width: 90px;
+            height: 90px;
+            filter: grayscale(100%) brightness(50%) drop-shadow(0 0 5px rgba(0,0,0,0.8));
+            transition: all var(--transition-base);
+        }
+
+        .contact-icons img:hover {
+            transform: translateY(-20px) scale(1.25) rotateZ(5deg);
+            filter: grayscale(0%) brightness(180%) drop-shadow(0 0 40px var(--shadow-primary)) drop-shadow(0 0 40px var(--shadow-secondary));
+        }
+
+        /* Hamburger menu specific styles */
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            color: var(--text-main);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1800px) {
+            body::after { font-size: 18rem; letter-spacing: 12px; }
+            nav { padding: 1.5rem 6%; }
+            .logo { font-size: 3rem; }
+            .nav-links a { margin-left: 3.5rem; font-size: 1.25rem; }
+            section { padding: 12rem 8%; }
+            h1 { font-size: 5rem; }
+            h2 { font-size: 4rem; }
+            p { font-size: 1.4rem; }
+            .home img { width: 250px; height: 250px; }
+            .skill-item { min-width: 280px; height: 100px; font-size: 1.7rem; }
+            .video-card { max-width: 500px; height: 350px; }
+            .front { font-size: 2.2rem; }
+            .contact-icons img { width: 80px; height: 80px; }
+        }
+
+        @media (max-width: 1400px) {
+            body::after { font-size: 15rem; letter-spacing: 10px; }
+            nav { padding: 1.2rem 5%; }
+            .logo { font-size: 2.5rem; }
+            .nav-links a { margin-left: 3rem; font-size: 1.15rem; }
+            section { padding: 10rem 6%; }
+            h1 { font-size: 4rem; }
+            h2 { font-size: 3.5rem; }
+            p { font-size: 1.3rem; }
+            .home img { width: 220px; height: 220px; }
+            .skill-item { min-width: 250px; height: 90px; font-size: 1.5rem; }
+            .video-card { max-width: 450px; height: 320px; }
+            .front { font-size: 2rem; }
+            .contact-icons img { width: 70px; height: 70px; }
+        }
+
+        @media (max-width: 1024px) {
+            body::after { font-size: 10rem; letter-spacing: 8px; }
+            nav { flex-direction: column; align-items: flex-start; padding: 1rem; }
+            .logo { margin-bottom: 1rem; font-size: 2.2rem; }
+            .nav-links { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; }
+            .nav-links a { margin: 0.5rem 1rem; font-size: 1.1rem; }
+            section { padding: 8rem 4%; }
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 3rem; }
+            p { font-size: 1.2rem; }
+            .home img { width: 180px; height: 180px; }
+            .skills-container { gap: 2.5rem; }
+            .skill-item { min-width: 220px; height: 80px; font-size: 1.3rem; }
+            .work-container { grid-template-columns: 1fr; gap: 3rem; }
+            .video-card { max-width: 90%; height: 280px; }
+            .front { font-size: 1.8rem; }
+            .contact-icons { gap: 5rem; }
+            .contact-icons img { width: 60px; height: 60px; }
+        }
+
+        @media (max-width: 768px) {
+            body::after { font-size: 7rem; letter-spacing: 5px; }
+            .logo { font-size: 1.8rem; }
+            
+            /* Hamburger menu specific styles for small screens */
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 101;
+            }
+
+            .nav-links {
+                display: none; /* Hidden by default */
+                flex-direction: column;
+                align-items: center;
+                background: var(--navbar-bg);
+                position: absolute;
+                top: 100%; /* Position below the navbar */
+                right: 0;
+                width: 100%;
+                padding: 1.5rem 0;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+                z-index: 100;
+                transition: all 0.5s ease-in-out; /* Smooth transition for menu toggle */
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            nav {
+                flex-direction: row; /* Keep logo and hamburger on one row */
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links a { font-size: 1rem; margin: 0.4rem 0; }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            p { font-size: 1rem; }
+            .home img { width: 150px; height: 150px; }
+            .skills-container { gap: 1.5rem; }
+            .skill-item { min-width: 180px; height: 70px; font-size: 1.1rem; }
+            .video-card { height: auto; /* Allow height to adjust for content */ }
+            .back video { height: auto; /* Allow height to adjust */ }
+            .front { font-size: 1.6rem; }
+            .contact-icons { gap: 3rem; }
+            .contact-icons img { width: 50px; height: 50px; }
+        }
+
+        @media (max-width: 480px) {
+            body::after { font-size: 5rem; letter-spacing: 3px; }
+            .logo { font-size: 1.5rem; }
+            .nav-links { flex-direction: column; align-items: center; }
+            .nav-links a { margin: 0.2rem 0; font-size: 0.9rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            p { font-size: 0.9rem; }
+            .home img { width: 120px; height: 120px; }
+            .skills-container { gap: 1rem; }
+            .skill-item { min-width: 150px; height: 60px; font-size: 1rem; padding: 0 1.2rem; }
+            .video-card { height: 180px; }
+            .front { font-size: 1.4rem; }
+            .contact-icons { gap: 2rem; }
+            .contact-icons img { width: 40px; height: 40px; }
+        }
+    </style>
 </head>
 <body>
-  <nav id="navbar">
-    <div class="logo">Shravanth</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About Me</a>
-      <a href="#skills">Skills</a>
-      <a href="#work">My Work</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <section id="home" class="home">
-    <img src="shravanth.jpg" alt="Shravanth" />
-    <h1>Hi, I’m K. Shravanth</h1>
-    <p>A passionate **Creative Content Creator** & **Visual Storyteller**, bringing ideas to life through engaging design, dynamic motion graphics, and compelling narratives. I craft visuals that resonate and make an impact.</p>
-  </section>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>My journey in content creation is driven by a desire to transform concepts into captivating visual experiences. I specialize in **motion graphics, video editing, and crafting narratives** that deeply connect with audiences across various platforms, especially social media. I thrive on innovative challenges and constantly explore new techniques to deliver exceptional results.</p>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-container">
-      <div class="skill-item"><span>Video Editing</span></div>
-      <div class="skill-item"><span>Motion Graphics</span></div>
-      <div class="skill-item"><span>Storytelling</span></div>
-      <div class="skill-item"><span>Instagram Content</span></div>
-    </div>
-  </section>
-
-  <section id="work">
-    <h2>My Work</h2>
-    <div class="work-container">
-      <div class="video-card">
-        <div class="video-inner">
-          <div class="front">Logo Animation</div>
-          <div class="back">
-            <video src="Burger King Logo (1080p).mp4" autoplay muted loop controls></video>
-          </div>
+    <nav id="navbar">
+        <div class="logo">Shravanth</div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#work">My Work</a>
+            <a href="#contact">Contact</a>
         </div>
-      </div>
-      <div class="video-card">
-        <div class="video-inner">
-          <div class="front">ShowReel</div>
-          <div class="back">
-            <video src="VFX compositing showreel (1080p) (1).mp4" autoplay muted loop controls></video>
-          </div>
+    </nav>
+
+    <section id="home" class="home">
+        <img src="shravanth.jpg" alt="Shravanth" />
+        <h1>Hi, I’m K. Shravanth</h1>
+        <p>A passionate **Creative Content Creator** & **Visual Storyteller**, bringing ideas to life through engaging design, dynamic motion graphics, and compelling narratives. I craft visuals that resonate and make an impact.</p>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>My journey in content creation is driven by a desire to transform concepts into captivating visual experiences. I specialize in **motion graphics, video editing, and crafting narratives** that deeply connect with audiences across various platforms, especially social media. I thrive on innovative challenges and constantly explore new techniques to deliver exceptional results.</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item"><span>Video Editing</span></div>
+            <div class="skill-item"><span>Motion Graphics</span></div>
+            <div class="skill-item"><span>Storytelling</span></div>
+            <div class="skill-item"><span>Instagram Content</span></div>
         </div>
-      </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <h2>Let's Connect</h2>
-    <p>I'm always open to new collaborations and exciting projects. Feel free to reach out to discuss your ideas or just to say hello!</p>
-    <div class="contact-icons">
-      <a href="https://www.instagram.com/shravanth3277?igsh=MWdqZzZyYTZvcGszaQ==" target="_blank" aria-label="Instagram Profile">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
-      </a>
-      <a href="https://www.youtube.com/@MonsterMind-l2d" target="_blank" aria-label="Youtube Channel">
-  <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
-</a>
-      <a href="https://www.linkedin.com/in/shravanth-k-004223222/" target="_blank" aria-label="LinkedIn Profile">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" />
-      </a>
-      <a href="mailto:shravanth3277@gmail.com" aria-label="Send Email">
-        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" />
-      </a>
-    </div>
-  </section>
+    <section id="work">
+        <h2>My Work</h2>
+        <div class="work-container">
+            <div class="video-card">
+                <div class="video-inner">
+                    <div class="front">Logo Animation</div>
+                    <div class="back">
+                        <video src="Burger King Logo (1080p).mp4" autoplay muted loop controls></video>
+                    </div>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-inner">
+                    <div class="front">ShowReel</div>
+                    <div class="back">
+                        <video src="VFX compositing showreel (1080p) (1).mp4" autoplay muted loop controls></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    document.querySelectorAll('nav a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+    <section id="contact">
+        <h2>Let's Connect</h2>
+        <p>I'm always open to new collaborations and exciting projects. Feel free to reach out to discuss your ideas or just to say hello!</p>
+        <div class="contact-icons">
+            <a href="https://www.instagram.com/shravanth3277?igsh=MWdqZzZyYTZvcGszaQ==" target="_blank" aria-label="Instagram Profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+            </a>
+            <a href="https://www.youtube.com/@MonsterMind-l2d" target="_blank" aria-label="Youtube Channel">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+            </a>
+            <a href="https://www.linkedin.com/in/shravanth-k-004223222/" target="_blank" aria-label="LinkedIn Profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" />
+            </a>
+            <a href="mailto:shravanth3277@gmail.com" aria-label="Send Email">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" />
+            </a>
+        </div>
+    </section>
 
-            if (targetElement) {
-                const navbarHeight = document.getElementById('navbar').offsetHeight;
-                const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+    <script>
+        // Smooth scroll (already present)
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
 
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                if (targetElement) {
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+
+                    // Close hamburger menu on link click if it's open
+                    const navLinks = document.getElementById('navLinks');
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        // Navbar style on scroll
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
+                navbar.style.boxShadow = '0 10px 35px rgba(0, 0, 0, 0.9)';
+            } else {
+                navbar.style.backgroundColor = 'var(--navbar-bg)';
+                navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.8)';
             }
         });
-    });
 
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.99)';
-            navbar.style.boxShadow = '0 10px 35px rgba(0, 0, 0, 0.9)';
-        } else {
-            navbar.style.backgroundColor = 'var(--navbar-bg)';
-            navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.8)';
-        }
-    });
-  </script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
