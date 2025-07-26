@@ -70,7 +70,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotateY(15deg) scale(1.1);
-            font-size: 22rem;
+            font-size: 22rem; /* Initial large size */
             font-weight: 700;
             color: rgba(255, 255, 255, 0.005);
             text-shadow: 0 0 50px rgba(0,255,255,0.03), 0 0 50px rgba(255,0,255,0.03);
@@ -505,7 +505,7 @@
         }
 
         @media (max-width: 768px) {
-            body::after { font-size: 7rem; letter-spacing: 5px; }
+            body::after { font-size: 6rem; letter-spacing: 5px; } /* Adjusted font size */
             .logo { font-size: 1.8rem; }
             
             /* Hamburger menu specific styles for small screens */
@@ -558,7 +558,7 @@
         }
 
         @media (max-width: 480px) {
-            body::after { font-size: 5rem; letter-spacing: 3px; }
+            body::after { font-size: 4rem; letter-spacing: 3px; } /* Adjusted font size further */
             .logo { font-size: 1.5rem; }
             .nav-links { flex-direction: column; align-items: center; }
             .nav-links a { margin: 0.2rem 0; font-size: 0.9rem; }
