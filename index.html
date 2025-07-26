@@ -505,7 +505,7 @@
         }
 
         @media (max-width: 768px) {
-            body::after { font-size: 6rem; letter-spacing: 5px; } /* Adjusted font size */
+            body::after { font-size: 6rem; letter-spacing: 5px; } /* Adjusted watermark font size */
             .logo { font-size: 1.8rem; }
             
             /* Hamburger menu specific styles for small screens */
@@ -544,7 +544,7 @@
             }
 
             .nav-links a { font-size: 1rem; margin: 0.4rem 0; }
-            h1 { font-size: 3rem; }
+            h1 { font-size: 2.5rem; } /* Further adjusted for 768px and below */
             h2 { font-size: 2.5rem; }
             p { font-size: 1rem; }
             .home img { width: 150px; height: 150px; }
@@ -558,11 +558,11 @@
         }
 
         @media (max-width: 480px) {
-            body::after { font-size: 4rem; letter-spacing: 3px; } /* Adjusted font size further */
+            body::after { font-size: 4rem; letter-spacing: 3px; } /* Further adjusted watermark font size */
             .logo { font-size: 1.5rem; }
             .nav-links { flex-direction: column; align-items: center; }
             .nav-links a { margin: 0.2rem 0; font-size: 0.9rem; }
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2rem; } /* Further adjusted for 480px and below */
             h2 { font-size: 2rem; }
             p { font-size: 0.9rem; }
             .home img { width: 120px; height: 120px; }
@@ -653,7 +653,7 @@
     </section>
 
     <script>
-        // Smooth scroll (already present)
+        // Smooth scroll for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -678,7 +678,7 @@
             });
         });
 
-        // Navbar style on scroll
+        // Navbar style change on scroll
         window.addEventListener('scroll', function () {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -690,7 +690,7 @@
             }
         });
 
-        // Hamburger toggle
+        // Hamburger menu toggle functionality
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
         hamburger.addEventListener('click', () => {
